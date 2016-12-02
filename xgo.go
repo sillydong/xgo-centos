@@ -39,10 +39,12 @@ func init() {
 }
 
 // Cross compilation docker containers
-var dockerDist = "sillydong/xgo-centos-1.7.3"
+var dockerBase = "sillydong/xgo-centos-base"
+var dockerDist = "sillydong/xgo-centos-"
 
 // Command line arguments to fine tune the compilation
 var (
+	goVersion   = flag.String("go", "latest", "Go release to use for cross compilation")
 	srcPackage  = flag.String("pkg", "", "Sub-package to build if not root import")
 	srcRemote   = flag.String("remote", "", "Version control remote repository to build")
 	srcBranch   = flag.String("branch", "", "Version control branch to build")
@@ -50,7 +52,7 @@ var (
 	outFolder   = flag.String("dest", "", "Destination folder to put binaries in (empty = current)")
 	crossDeps   = flag.String("deps", "", "CGO dependencies (configure/make based archives)")
 	crossArgs   = flag.String("depsargs", "", "CGO dependency configure arguments")
-	targets     = flag.String("targets", "linux/amd64", "Comma separated targets to build for, support only linux/amd64 and linux/386")
+	targets     = flag.String("targets", "linux/*", "Comma separated targets to build for, support only linux/amd64 and linux/386")
 	dockerImage = flag.String("image", "", "Use custom docker image instead of official distribution")
 )
 
@@ -107,7 +109,7 @@ func main() {
 			log.Fatalf("Usage: %s [options] <go import path>", os.Args[0])
 		}
 		// Select the image to use, either official or custom
-		image = dockerDist
+		image = dockerDist + *goVersion
 		if *dockerImage != "" {
 			image = *dockerImage
 		}
@@ -281,6 +283,7 @@ func compile(image string, config *ConfigFlags, flags *BuildFlags, folder string
 
 	args := []string{
 		"run", "--rm",
+		"--entrypoint", "/build.sh",
 		"-v", folder + ":/build",
 		"-v", depsCache + ":/deps-cache:ro",
 		"-e", "REPO_REMOTE=" + config.Remote,
