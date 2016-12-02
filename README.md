@@ -10,6 +10,8 @@
 
 `docker pull sillydong/xgo-centos-latest`
 
+**image is pushing**
+
 `go get -u github.com/sillydong/xgo-centos`
 
 ## Build
