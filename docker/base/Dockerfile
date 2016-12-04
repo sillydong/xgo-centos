@@ -24,7 +24,7 @@ RUN chmod +x $FETCH
 
 # Make sure yum is up to date and dependent packages are installed
 RUN \
-  yum -y install glibc.i686 glibc-devel.i686 glibc.x86_64 glibc-devel.x86_64 glibc-headers.x86_64 glibc-static.i686 glibc-static.x86_64 glibc-utils.x86_64 libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 ibstdc++-devel.i686 libstdc++-devel.x86_64 patch make gcc gcc-c++ automake cmake autoconf libtool libtool-libs zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ca-certificates make cpio wget zip unzip p7zip git mercurial bzr texinfo help2man tar
+  yum -y install glibc.i686 glibc-devel.i686 glibc.x86_64 glibc-devel.x86_64 glibc-headers.x86_64 glibc-static.i686 glibc-static.x86_64 glibc-utils.x86_64 libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 ibstdc++-devel.i686 libstdc++-devel.x86_64 patch make gcc gcc-c++ automake cmake autoconf libtool libtool-libs zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ca-certificates make cpio wget zip unzip p7zip git mercurial bzr texinfo help2man tar && yum clean all
 
 # Fix any stock package issues
 RUN ln -s /usr/include/asm-generic /usr/include/asm
