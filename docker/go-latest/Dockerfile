@@ -3,6 +3,6 @@
 #
 # Released under the MIT license.
 
-FROM sillydong/xgo-centos-1.7.3
+FROM sillydong/xgo-centos-1.8.3
 
 MAINTAINER Péter Szilágyi <peterke@gmail.com>
