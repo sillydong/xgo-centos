@@ -25,3 +25,31 @@ build current directory to linux/amd64
 `xgo-centos --targets=linux/amd64 .`
 
 **Further information and "how to" visit [karalabe/xgo](https://github.com/karalabe/xgo), just change `xgo` to `xgo-centos`**
+
+## Update Image
+
+add go version
+
+visit golang versions
+
+`https://storage.googleapis.com/golang/`
+
+find your version file and sha256, update Dockerfile
+
+run build {VERSION}
+
+`docker build -t sillydong/xgo-centos-{VERSION} .`
+
+push to docker hub
+
+`docker push sillydong/xgo-centos-{VERSION}`
+
+run build latest
+
+`docker build -t sillydong/latest`
+
+push to docker hub
+
+`docker push sillydong/xgo-centos-latest`
+
+done
